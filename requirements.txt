@@ -23,7 +23,6 @@ Pygments==2.19.1
 pymongo==4.13.2
 pypiwin32==223
 python-dotenv==1.1.0
-pywin32==310
 requests==2.32.4
 sh==2.2.2
 urllib3==2.5.0
