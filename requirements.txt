@@ -21,7 +21,6 @@ platformdirs==4.3.8
 ptyprocess==0.7.0
 Pygments==2.19.1
 pymongo==4.13.2
-pypiwin32==223
 python-dotenv==1.1.0
 requests==2.32.4
 sh==2.2.2
