@@ -48,12 +48,18 @@ def add_transaction():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-# Endpoint để lấy tất cả các giao dịch
+# Endpoint để lấy tất cả các giao dịch trong 30 ngày qua
 @app.route("/transactions", methods=["GET"])
 def get_transactions():
     try:
-        all_transactions = list(transactions_collection.find().sort("createdAt", -1)) # Sắp xếp mới nhất lên đầu
-        
+        # Lấy thời điểm 30 ngày trước
+        thirty_days_ago = datetime.datetime.utcnow() - datetime.timedelta(days=30)
+        # Lọc các transaction có createdAt >= thirty_days_ago
+        query = {"createdAt": {"$gte": thirty_days_ago}}
+        all_transactions = list(
+            transactions_collection.find(query).sort("createdAt", -1)
+        )
+
         # Chuyển đổi ObjectId thành string để có thể gửi qua JSON
         for transaction in all_transactions:
             transaction["_id"] = str(transaction["_id"])
